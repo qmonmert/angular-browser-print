@@ -1,10 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+
+declare var BrowserPrint: any;
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html"
 })
-export class AppComponent {
-  title = 'angular-browser-print';
+export class AppComponent implements OnInit {
+  selected_device: any;
+
+  ngOnInit() {
+    BrowserPrint.getDefaultDevice(
+      "printer",
+      function(device) {
+        this.selected_device = device;
+      },
+      function(error) {
+        debugger;
+      }
+    );
+  }
 }
